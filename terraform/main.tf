@@ -6,6 +6,9 @@ resource "google_compute_instance" "app" {
 name = "reddit-app"
 machine_type = "g1-small"
 zone = "europe-west1-b"
+
+tags = ["reddit-app"]
+
 metadata {
 	sshKeys = "appuser:${file ("~/.ssh/id_rsa.pub")}"
 	}
@@ -22,6 +25,7 @@ network = "default"
 # использовать ephemeral IP для доступа из Интернет
 access_config {}
   }
+}
 resource "google_compute_firewall" "firewall_puma" {
 name = "allow-puma-default"
 # Название сети, в которой действует правило
@@ -34,6 +38,5 @@ allow {
 # Каким адресам разрешаем доступ
 source_ranges = ["0.0.0.0/0"]
 # Правило применимо для инстансов с тегом …
-target_tags = ["reddit-app"]
-  
+target_tags = ["reddit-app"]  
 }
