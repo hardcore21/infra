@@ -40,3 +40,13 @@ source_ranges = ["0.0.0.0/0"]
 # Правило применимо для инстансов с тегом …
 target_tags = ["reddit-app"]  
 }
+
+provisioner "file" {
+	source 		= "files/puma.service"
+	destination	= "/tmp/puma.service"
+	}
+provisioner "remote-exec" {
+	script 		= "files/deploy.sh"
+	}
+
+
