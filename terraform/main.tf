@@ -35,5 +35,5 @@ allow {
 source_ranges = ["0.0.0.0/0"]
 # Правило применимо для инстансов с тегом …
 target_tags = ["reddit-app"]
-  }
+  
 }
