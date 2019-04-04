@@ -2,6 +2,7 @@ provider "google" {
    project = "infra-236514"
    region  = "europe-west1"
 }
+
 resource "google_compute_instance" "app" {
    name         = "reddit-app"
    machine_type = "g1-small"
@@ -32,5 +33,14 @@ provisioner "file" {
 provisioner "remote-exec" {
 	script 	= "files/deploy.sh"
 	}
+resource "google_compute_firewall" "firewall_puma" {
+	name    = "allow-puma-default"
+	network = "default"
+   allow {
+   protocol = "tcp"
+   ports = ["9292"]
+   }
+	source_ranges = ["0.0.0.0/0"]
+	target_tags = ["reddit-app"]
 }
-
+}
