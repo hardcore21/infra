@@ -33,6 +33,7 @@ provisioner "file" {
 provisioner "remote-exec" {
 	script 	= "files/deploy.sh"
 	}
+}
 resource "google_compute_firewall" "firewall_puma" {
 	name    = "allow-puma-default"
 	network = "default"
@@ -43,4 +44,4 @@ resource "google_compute_firewall" "firewall_puma" {
 	source_ranges = ["0.0.0.0/0"]
 	target_tags = ["reddit-app"]
 }
-}
+
